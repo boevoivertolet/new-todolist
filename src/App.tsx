@@ -11,9 +11,12 @@ function App() {
         {id: 4, title: 'Redux', isDone: false}
     ]
     //add hook
-    let arr = useState(tasksForLearn)
+    /*let arr = useState(tasksForLearn)
     let tasks = arr[0];
-    let setTasks = arr[1];
+    let setTasks = arr[1];*/
+
+    let [tasks, setTasks] = useState(tasksForLearn)
+
 
 
     // функция для удаление таски по нажатию кнопки
