@@ -2,6 +2,8 @@ import './App.css'
 import {TasksType, Todolist} from './components/TodoList';
 import {useState} from 'react';
 
+export type FilterValuesType = 'all'|'active'|'completed'
+
 function App() {
 // data (данные)
 
@@ -10,14 +12,14 @@ function App() {
     let tasks = arr[0];
     let setTasks = arr[1];*/
 
-    let [tasks, setTasks] = useState([
+    let [tasks, setTasks] = useState<TasksType[]>([
             {id: 1, title: 'CSS/HTML', isDone: true},
             {id: 2, title: 'JS', isDone: true},
             {id: 3, title: 'React', isDone: false},
             {id: 4, title: 'Redux', isDone: false}
         ]
     )
-    let [filter, setFilter] =useState('all')
+    let [filter, setFilter] =useState<FilterValuesType>('all')
 
 
     // функция для удаление таски по нажатию кнопки
@@ -26,6 +28,10 @@ function App() {
     function removeTask(id: number) {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
+    }
+
+    function changeFilter(value: FilterValuesType) {
+        setFilter(value)
     }
 
     let tasksForTodoList =tasks;
@@ -45,6 +51,7 @@ function App() {
                 title={'What to learn'}
                 tasks={tasksForTodoList}
                 removeTask={removeTask}
+                changeFilter={changeFilter}
             />
 
         </div>
