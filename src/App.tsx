@@ -11,7 +11,8 @@ function App() {
     ]
 
     // функция для удаление таски по нажатию кнопки
-    // resultTask переменная в которую попадут вс значения после фильтрации.
+    // присваеваем tasksForLearn значение tasksForLearn после фильтрации
+    //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
     function removeTask(id: number) {
         tasksForLearn = tasksForLearn.filter(t => t.id !== id)
     }
