@@ -31,7 +31,7 @@ export function Todolist(props: TodoListPropsType) {
                 }
             </ul>
             <div>
-                <button>all</button>
+                <button onClick={()=> {}}>all</button>
                 <button>active</button>
                 <button>completed</button>
             </div>
