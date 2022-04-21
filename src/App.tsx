@@ -1,4 +1,3 @@
-
 import './App.css'
 import {TasksType, Todolist} from './components/TodoList';
 
@@ -12,14 +11,18 @@ function App() {
     ]
 
     // функция для удаление таски по нажатию кнопки
+    // resultTask переменная в которую попадут вс значения после фильтрации.
     function removeTask(id: number) {
-        let result = tasksForLearn.filter(() => {
-        })
+        tasksForLearn = tasksForLearn.filter(t => t.id !== id)
     }
 
     return (
         <div className="App">
-            <Todolist title={'What to learn'} tasks={tasksForLearn}/>
+            <Todolist
+                title={'What to learn'}
+                tasks={tasksForLearn}
+                removeTask={removeTask}
+            />
 
         </div>
     );
