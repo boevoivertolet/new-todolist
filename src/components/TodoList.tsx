@@ -22,12 +22,21 @@ export function Todolist(props: TodoListPropsType) {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input value={newTaskTitle} onChange={(e) => {
+                <input
+                    value={newTaskTitle}
+                    onChange={(e) => {
                     setNewTaskTitle(e.currentTarget.value)
-                }}/>
+                }}
+                onKeyPress={(e) => {
+                    if(e.charCode === 13){
+                        props.addTask(newTaskTitle);
+                        setNewTaskTitle('')
+                    }
+                } }
+                />
                 <button onClick={(e) => {
                     props.addTask(newTaskTitle);
-                    setNewTaskTitle(' ')
+                    setNewTaskTitle(' ');
                 }
                 }>+
                 </button>
