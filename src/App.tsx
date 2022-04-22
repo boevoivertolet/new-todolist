@@ -3,7 +3,7 @@ import {TasksType, Todolist} from './components/TodoList';
 import {useState} from 'react';
 import {v1} from 'uuid';
 
-export type FilterValuesType = 'all'|'active'|'completed'
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
 // data (данные)
@@ -20,30 +20,35 @@ function App() {
             {id: v1(), title: 'Redux', isDone: false}
         ]
     )
-    let [filter, setFilter] =useState<FilterValuesType>('all')
+
+    function addTask() {
+        let newTask = {id: v1(), title: 'New Task', isDone: false};
+        let newTasks = [newTask, ...tasks];
+        setTasks(newTasks);
+    }
+
+    let [filter, setFilter] = useState<FilterValuesType>('all');
 
 
     // функция для удаление таски по нажатию кнопки
     // присваеваем tasksForLearn значение tasksForLearn после фильтрации
     //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
     function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id !== id)
-        setTasks(filteredTasks)
+        let filteredTasks = tasks.filter(t => t.id !== id);
+        setTasks(filteredTasks);
     }
 
     function changeFilter(value: FilterValuesType) {
-        setFilter(value)
+        setFilter(value);
     }
 
-    let tasksForTodoList =tasks;
-    if(filter === 'completed') {
-        tasksForTodoList= tasks.filter(t=> t.isDone)
+    let tasksForTodoList = tasks;
+    if (filter === 'completed') {
+        tasksForTodoList = tasks.filter(t => t.isDone);
     }
-    if(filter === 'active') {
-        tasksForTodoList= tasks.filter(t=> !t.isDone)
+    if (filter === 'active') {
+        tasksForTodoList = tasks.filter(t => !t.isDone);
     }
-
-
 
 
     return (
@@ -53,6 +58,7 @@ function App() {
                 tasks={tasksForTodoList}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
 
         </div>
