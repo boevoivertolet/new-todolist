@@ -1,6 +1,7 @@
 import './App.css'
 import {TasksType, Todolist} from './components/TodoList';
 import {useState} from 'react';
+import {v1} from 'uuid';
 
 export type FilterValuesType = 'all'|'active'|'completed'
 
@@ -13,10 +14,10 @@ function App() {
     let setTasks = arr[1];*/
 
     let [tasks, setTasks] = useState<TasksType[]>([
-            {id: 1, title: 'CSS/HTML', isDone: true},
-            {id: 2, title: 'JS', isDone: true},
-            {id: 3, title: 'React', isDone: false},
-            {id: 4, title: 'Redux', isDone: false}
+            {id: v1(), title: 'CSS/HTML', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'React', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false}
         ]
     )
     let [filter, setFilter] =useState<FilterValuesType>('all')
@@ -25,7 +26,7 @@ function App() {
     // функция для удаление таски по нажатию кнопки
     // присваеваем tasksForLearn значение tasksForLearn после фильтрации
     //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
     }
