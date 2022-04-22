@@ -20,16 +20,14 @@ function App() {
             {id: v1(), title: 'Redux', isDone: false}
         ]
     )
-
-    function addTask() {
-        let newTask = {id: v1(), title: 'New Task', isDone: false};
-        let newTasks = [newTask, ...tasks];
-        setTasks(newTasks);
-    }
-
     let [filter, setFilter] = useState<FilterValuesType>('all');
 
 
+    function addTask(title: string) {
+        let newTask = {id: v1(), title: title, isDone: false};
+        let newTasks = [newTask, ...tasks];
+        setTasks(newTasks);
+    }
     // функция для удаление таски по нажатию кнопки
     // присваеваем tasksForLearn значение tasksForLearn после фильтрации
     //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
@@ -37,10 +35,11 @@ function App() {
         let filteredTasks = tasks.filter(t => t.id !== id);
         setTasks(filteredTasks);
     }
-
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
+
+
 
     let tasksForTodoList = tasks;
     if (filter === 'completed') {
