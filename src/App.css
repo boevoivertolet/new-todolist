@@ -11,3 +11,13 @@
 .ul {
     text-align: left;
 }
+.error {
+    border: red 1px solid;
+}
+
+.error-message {
+    color: red;
+}
+.active-filter {
+    background-color: darksalmon;
+}

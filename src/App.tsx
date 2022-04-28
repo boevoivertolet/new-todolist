@@ -28,6 +28,7 @@ function App() {
         let newTasks = [newTask, ...tasks];
         setTasks(newTasks);
     }
+
     // функция для удаление таски по нажатию кнопки
     // присваеваем tasksForLearn значение tasksForLearn после фильтрации
     //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
@@ -35,10 +36,19 @@ function App() {
         let filteredTasks = tasks.filter(t => t.id !== id);
         setTasks(filteredTasks);
     }
+
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
 
+    function changeStatus(taskID: string, isDone : boolean) {
+
+        let task = tasks.find(t => t.id === taskID);// Я в тасках ищу task.id, как только я его найду я запишу его в task
+        if (task){
+            task.isDone = isDone
+        }
+        setTasks([...tasks]);
+    }
 
 
     let tasksForTodoList = tasks;
@@ -58,6 +68,8 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeStatus={changeStatus}
+                filter ={filter}
             />
 
         </div>
