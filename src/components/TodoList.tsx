@@ -17,17 +17,15 @@ type TodoListPropsType = {
     addTask: (title: string, todoListId: string) => void
     changeStatus: (taskID: string, isDone: boolean, todoListId: string) => void
     filter: 'all' | 'active' | 'completed'
-    removeTodoList:(todoListId: string)=> void
+    removeTodoList: (todoListId: string) => void
 
 }
 
 export function Todolist(props: TodoListPropsType) {
     const removeTodoList = () => {
         props.removeTodoList(props.id);
-      
+
     }
-
-
     const onClickAll = () => {
         props.changeFilter('all', props.id)
     }
@@ -37,6 +35,9 @@ export function Todolist(props: TodoListPropsType) {
     const onClickCompleted = () => {
         props.changeFilter('completed', props.id)
     }
+    const addTask = (title: string) => {
+      props.addTask(title, props.id)
+    }
 
 
     return (
@@ -44,7 +45,9 @@ export function Todolist(props: TodoListPropsType) {
             <h3>{props.title}
                 <button onClick={removeTodoList}>Delete</button>
             </h3>
-            <AddItemForm id={props.id} addTask={props.addTask}/>
+            <AddItemForm addItem={addTask}
+
+            />
             <ul className={'ul'}>
                 {
                     props.tasks.map((t) => {
