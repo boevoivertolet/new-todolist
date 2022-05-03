@@ -11,8 +11,8 @@ type TodolistsType = {
     filter: FilterValuesType
 
 }
-type TaskStateType ={
-    [key:string]: Array<TasksType>
+type TaskStateType = {
+    [key: string]: Array<TasksType>
 }
 
 function App() {
@@ -23,19 +23,19 @@ function App() {
     let tasks = arr[0];
     let setTasks = arr[1];*/
 
- /*   let [tasks, setTasks] = useState<TasksType[]>([
-            {id: v1(), title: 'CSS/HTML', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'React', isDone: false},
-            {id: v1(), title: 'Redux', isDone: false}
-        ]
-    )*/
+    /*   let [tasks, setTasks] = useState<TasksType[]>([
+               {id: v1(), title: 'CSS/HTML', isDone: true},
+               {id: v1(), title: 'JS', isDone: true},
+               {id: v1(), title: 'React', isDone: false},
+               {id: v1(), title: 'Redux', isDone: false}
+           ]
+       )*/
 
 
     function addTask(title: string, todoListId: string) {
         let task = {id: v1(), title: title, isDone: false};
         let tasks = tasksObj[todoListId];
-        let newTasks =[task, ...tasks];
+        let newTasks = [task, ...tasks];
         tasksObj[todoListId] = newTasks;
         setTasksObj({...tasksObj})
     }
@@ -44,7 +44,7 @@ function App() {
     // присваеваем tasksForLearn значение tasksForLearn после фильтрации
     //filter(t => t.id !== id) фильтр, пропусти те (t)таски id которых не равна id, которую надо удалить.
     function removeTask(id: string, todoListId: string) {
-        let tasks =tasksObj[todoListId];
+        let tasks = tasksObj[todoListId];
 
         let filteredTasks = tasks.filter(t => t.id !== id);
         tasksObj[todoListId] = filteredTasks
@@ -61,7 +61,7 @@ function App() {
 
     }
 
-    function changeStatus(taskID: string, isDone: boolean,todoListId: string ) {
+    function changeStatus(taskID: string, isDone: boolean, todoListId: string) {
         let tasks = tasksObj[todoListId];
 
         let task = tasks.find(t => t.id === taskID);// Я в тасках ищу task.id, как только я его найду я запишу его в task
@@ -70,7 +70,8 @@ function App() {
         }
         setTasksObj({...tasksObj});
     }
-    function changeTaskTitle(taskID: string, newTitle:string, todoListId: string ) {
+
+    function changeTaskTitle(taskID: string, newTitle: string, todoListId: string) {
         let tasks = tasksObj[todoListId];
 
         let task = tasks.find(t => t.id === taskID);// Я в тасках ищу task.id, как только я его найду я запишу его в task
@@ -96,6 +97,13 @@ function App() {
         setTasksObj(tasksObj)
 
     }
+    const changeTodoListTitle = (id: string, newTitle: string) => {
+        const todoList = todoLists.find(tl => tl.id === id)
+        if (todoList) {
+            todoList.title = newTitle
+            setTodoLists([...todoLists])
+        }
+    }
 
 
     let [tasksObj, setTasksObj] = useState<TaskStateType>({
@@ -112,19 +120,20 @@ function App() {
             {id: v1(), title: 'water', isDone: false}
         ]
     });
-function addTodoList(title: string){
-    let todoList: TodolistsType ={
-        id: v1(),
-        filter: 'all',
-        title: title
-    }
-    setTodoLists([todoList, ...todoLists])
-    setTasksObj({
-        ...tasksObj,
-        [todoList.id]:[]
-    })
 
-}
+    function addTodoList(title: string) {
+        let todoList: TodolistsType = {
+            id: v1(),
+            filter: 'all',
+            title: title
+        }
+        setTodoLists([todoList, ...todoLists])
+        setTasksObj({
+            ...tasksObj,
+            [todoList.id]: []
+        })
+
+    }
 
     return (
         <div className="App">
@@ -145,7 +154,7 @@ function addTodoList(title: string){
 
                     return (
                         <Todolist
-
+                            changeTodoListTitle={changeTodoListTitle}
                             key={tl.id}
                             id={tl.id}
                             title={tl.title}
