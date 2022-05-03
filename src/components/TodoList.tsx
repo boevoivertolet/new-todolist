@@ -16,7 +16,8 @@ type TodoListPropsType = {
     removeTask: (id: string, todoListId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (title: string, todoListId: string) => void
-    changeStatus: (taskID: string, isDone: boolean, todoListId: string) => void
+    changeTaskStatus: (taskID: string, isDone: boolean, todoListId: string) => void
+    changeTaskTitle: (taskID: string, newTitle:string, todoListId: string) => void
     filter: 'all' | 'active' | 'completed'
     removeTodoList: (todoListId: string) => void
 
@@ -54,7 +55,10 @@ export function Todolist(props: TodoListPropsType) {
                     props.tasks.map((t) => {
                         const onClickHandler = () => props.removeTask(t.id, props.id)
                         const onChangeInputCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                            props.changeStatus(t.id, e.currentTarget.checked, props.id)
+                            props.changeTaskStatus(t.id, e.currentTarget.checked, props.id)
+                        }
+                        const onChangeInputTitleHandler = (newValue: string) => {
+                            props.changeTaskTitle(t.id, newValue, props.id)
                         }
 
                         return <li className={t.isDone ? 'is-done' : ''} key={t.id}><input
@@ -63,7 +67,7 @@ export function Todolist(props: TodoListPropsType) {
                             checked={t.isDone}/>
                             <EditableSpan
                                 title={t.title}
-                                editMode={true}
+                                onChange={onChangeInputTitleHandler}
                             />
                             <button onClick={onClickHandler}>Del
                             </button>

@@ -70,6 +70,15 @@ function App() {
         }
         setTasksObj({...tasksObj});
     }
+    function changeTaskTitle(taskID: string, newTitle:string, todoListId: string ) {
+        let tasks = tasksObj[todoListId];
+
+        let task = tasks.find(t => t.id === taskID);// Я в тасках ищу task.id, как только я его найду я запишу его в task
+        if (task) {
+            task.title = newTitle
+        }
+        setTasksObj({...tasksObj});
+    }
 
     let todoListsId1 = v1()
     let todoListsId2 = v1()
@@ -136,6 +145,7 @@ function addTodoList(title: string){
 
                     return (
                         <Todolist
+
                             key={tl.id}
                             id={tl.id}
                             title={tl.title}
@@ -143,7 +153,8 @@ function addTodoList(title: string){
                             removeTask={removeTask}
                             changeFilter={changeFilter}
                             addTask={addTask}
-                            changeStatus={changeStatus}
+                            changeTaskStatus={changeStatus}
+                            changeTaskTitle={changeTaskTitle}
                             filter={tl.filter}
                             removeTodoList={removeTodoList}
                         />
