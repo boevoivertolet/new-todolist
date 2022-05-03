@@ -76,6 +76,15 @@ function App() {
             {id: todoListsId2, title: 'What to buy', filter: 'completed'},
         ]
     )
+    let removeTodoList = (todoListId: string) => {
+        let filteredTodoList = todoLists.filter(tl => tl.id !== todoListId)
+        setTodoLists(filteredTodoList)
+        delete tasksObj[todoListId];
+        setTasksObj(tasksObj)
+
+    }
+
+
     let [tasksObj, setTasksObj] = useState({
         [todoListsId1]: [
             {id: v1(), title: 'CSS/HTML', isDone: true},
@@ -94,6 +103,9 @@ function App() {
 
     return (
         <div className="App">
+
+            <input/><button>x</button>
+
             {
                 todoLists.map((tl) => {
                     let tasksForTodoList = tasksObj[tl.id];
@@ -115,6 +127,7 @@ function App() {
                             addTask={addTask}
                             changeStatus={changeStatus}
                             filter={tl.filter}
+                            removeTodoList={removeTodoList}
                         />
                     )
                 })
